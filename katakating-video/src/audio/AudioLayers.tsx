@@ -5,8 +5,12 @@ import { VO_LINES } from "../timing/vo";
 import { MUSIC_TRACK, SFX_LEVELS, VO_TRACK } from "./config";
 import { SFX_CUES, type SfxCue } from "./sfxCues";
 
-/** Duck factor (0 = full music, 1 = fully ducked) at a frame, from the VO map. */
+/**
+ * Duck factor (0 = full music, 1 = fully ducked) at a frame, from the VO map.
+ * No VO file yet → no ducking, so the music doesn't dip under silence.
+ */
 const duckAmount = (frame: number, fps: number) => {
+  if (!VO_TRACK.src) return 0;
   const fade = MUSIC_TRACK.duckFadeSeconds * fps;
   let amount = 0;
   for (const line of VO_LINES) {
