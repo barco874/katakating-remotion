@@ -30,8 +30,10 @@ export const BrandRow: React.FC<{
   /** 0→1 left-to-right reveal of the wordmark characters. */
   readonly chars?: number;
   readonly logo?: number;
+  /** Extra scale on the logo mark only (around its centre). */
+  readonly logoScale?: number;
   readonly style?: React.CSSProperties;
-}> = ({ scale = 1, badge = 1, chars = 1, logo = 1, style }) => (
+}> = ({ scale = 1, badge = 1, chars = 1, logo = 1, logoScale = 1, style }) => (
   <div
     style={{
       display: "flex",
@@ -40,7 +42,7 @@ export const BrandRow: React.FC<{
       ...style,
     }}
   >
-    <Logo height={SITE.logoHeight * scale} style={{ opacity: logo }} />
+    <Logo height={SITE.logoHeight * scale} style={{ opacity: logo, scale: String(logoScale) }} />
     <span
       style={{
         fontFamily: FONT_MONO,

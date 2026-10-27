@@ -29,7 +29,9 @@ export const SceneReveal: React.FC = () => {
   const lift = progress(frame, B.wordmark - 4, 14, EASE.inOut);
 
   const chars = progress(frame, B.wordmark, 14, EASE.out);
-  const logo = progress(frame, B.wordmark - 2, 8, EASE.out);
+  // First appearance of the official logo: fade in + scale 95% → 100%, smooth ease-out.
+  const logo = progress(frame, B.wordmark - 2, 18, EASE.out);
+  const logoScale = 0.95 + 0.05 * logo;
   const badge = progress(frame, B.subline - 2, 10, EASE.snap);
 
   const dock = progress(frame, B.dock, 22, EASE.inOut);
@@ -84,7 +86,7 @@ export const SceneReveal: React.FC = () => {
       {/* KATAKATING lockup (official logo + wordmark + badge) */}
       {frame >= B.wordmark - 2 ? (
         <div style={{ position: "absolute", left, top: centerY, translate: "0 -50%" }}>
-          <BrandRow scale={scale} chars={chars} logo={logo} badge={badge} />
+          <BrandRow scale={scale} chars={chars} logo={logo} logoScale={logoScale} badge={badge} />
         </div>
       ) : null}
 
